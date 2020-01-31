@@ -7,7 +7,7 @@ public class BuildingBase : MonoBehaviour
     [Range(0, 1000)]
     public uint mOccupancy;
 
-    [SerializedField]
+    [SerializeField]
     string mTag;
     // Start is called before the first frame update
     void Start()
