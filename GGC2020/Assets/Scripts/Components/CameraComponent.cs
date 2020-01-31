@@ -7,9 +7,9 @@ public class CameraComponent : MonoBehaviour
 
     Transform mTransform;
 
-    float mainSpeed = 20.0f; //regular speed
-    float shiftAdd = 100.0f; //multiplied by how long shift is held.  Basically running
-    float maxShift = 150.0f; //Maximum speed when holdin gshift
+    float mainSpeed = 10.0f; //regular speed
+    //float shiftAdd = 40.0f; //multiplied by how long shift is held.  Basically running
+    //float maxShift = 50.0f; //Maximum speed when holdin gshift
     float camSens = 0.25f; //How sensitive it with mouse
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
@@ -45,19 +45,9 @@ public class CameraComponent : MonoBehaviour
         //Keyboard commands
         float f = 0.0f;
         Vector3 p = GetBaseInput();
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            totalRun += Time.deltaTime;
-            p = p * totalRun * shiftAdd;
-            p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-            p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-            p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-        }
-        else
-        {
-            totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-            p = p * mainSpeed;
-        }
+
+        totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+        p = p * mainSpeed;
 
         p = p * Time.deltaTime;
         Vector3 newPosition = transform.position;
@@ -77,19 +67,21 @@ public class CameraComponent : MonoBehaviour
     private Vector3 GetBaseInput()
     { //returns the basic values, if it's 0 than it's not active.
         Vector3 p_Velocity = new Vector3();
-        if (Input.GetKey(KeyCode.W))
+        Vector3 camPos = transform.position;
+
+        if (Input.GetKey(KeyCode.W) && camPos.z > -2.0f)
         {
-            p_Velocity += new Vector3(0, 1, 1);
+            p_Velocity += new Vector3(0, 0, 1);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && camPos.z < 25.0f)
         {
-            p_Velocity += new Vector3(0, -1, -1);
+            p_Velocity += new Vector3(0, 0, -1);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && camPos.x < 15.0f)
         {
             p_Velocity += new Vector3(-1, 0, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && camPos.x > -15.0f)
         {
             p_Velocity += new Vector3(1, 0, 0);
         }
