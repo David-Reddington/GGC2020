@@ -10,11 +10,11 @@ public class CameraComponent : MonoBehaviour
     float mainSpeed = 10.0f; //regular speed
     //float shiftAdd = 40.0f; //multiplied by how long shift is held.  Basically running
     //float maxShift = 50.0f; //Maximum speed when holdin gshift
-    float camSens = 0.25f; //How sensitive it with mouse
+    //float camSens = 0.25f; //How sensitive it with mouse
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
 
-    bool bIsAttached = false;
+    //bool bIsAttached = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class CameraComponent : MonoBehaviour
         transform.parent = null;
         transform.position = mTransform.position;
         transform.rotation = mTransform.rotation;
-        bIsAttached = false;
+        //bIsAttached = false;
 
         //if (Input.GetMouseButton(1))
         //{
@@ -43,7 +43,7 @@ public class CameraComponent : MonoBehaviour
 
 
         //Keyboard commands
-        float f = 0.0f;
+        //float f = 0.0f;
         Vector3 p = GetBaseInput();
 
         totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);

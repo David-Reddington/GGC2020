@@ -13,6 +13,7 @@ public class BuildingBase : MonoBehaviour
 
     [SerializeField]
     string mTag;
+
     // Start is called before the first frame update
     void Awake()
     {
