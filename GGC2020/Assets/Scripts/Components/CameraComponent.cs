@@ -7,7 +7,7 @@ public class CameraComponent : MonoBehaviour
 
     Transform mTransform;
 
-    float mainSpeed = 50.0f; //regular speed
+    float mainSpeed = 20.0f; //regular speed
     float shiftAdd = 100.0f; //multiplied by how long shift is held.  Basically running
     float maxShift = 150.0f; //Maximum speed when holdin gshift
     float camSens = 0.25f; //How sensitive it with mouse
