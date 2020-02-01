@@ -13,6 +13,15 @@ public class EnemyAI : MonoBehaviour
     private string mEnemyName;
 
     [SerializeField]
+    private uint mID;
+
+    public uint ID
+    {
+        get { return mID; }
+        set { mID = value; }
+    }
+
+    [SerializeField]
     private NavMeshAgent mNavAgent;
 
     [SerializeField]
@@ -44,4 +53,28 @@ public class EnemyAI : MonoBehaviour
     }
 
     protected virtual void Attack() { }
+
+    protected virtual void Movement() { }
+
+    public GameObject FindClosestBuilding(Vector3 target)
+    {
+        GameObject closest = null;
+        float closestDist = Mathf.Infinity;
+        int index = 0;
+        foreach (var b in FindObjectsOfType<BuildingBase>())
+        {
+            var dist = Vector3.Distance(transform.position, b.transform.position);
+            if (dist < closestDist)
+            {
+                closest = b.gameObject;
+                closestDist = dist;
+            }
+            ++index;
+        }
+        if (!closest)
+        {
+            return closest;
+        }
+        return null;
+    }
 }
