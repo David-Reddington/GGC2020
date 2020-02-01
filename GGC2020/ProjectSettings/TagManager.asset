@@ -7,6 +7,9 @@ TagManager:
   - Tower
   - Enemy
   - Town Hall
+  - Building
+  - GameManager
+  - CameraPosition
   layers:
   - Default
   - TransparentFX
