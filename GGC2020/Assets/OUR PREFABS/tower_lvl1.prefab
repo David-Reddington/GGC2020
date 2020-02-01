@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3305884048262172799}
   m_Layer: 0
   m_Name: tower_lvl1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029731402860094841}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.4707, y: -0.04, z: -11.663}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
@@ -92,6 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712681d1116e99744920a4c5c8644c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mOccupancy: 1
+  visionLightPrefab: {fileID: 857298589548457218, guid: 40ae4167e56ee0d4dbb52a4a5cb61ed9,
+    type: 3}
+  mTag: 
   population: 1
   range: 10
   damage: 1

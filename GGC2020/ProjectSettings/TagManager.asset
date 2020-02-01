@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tower
   - Enemy
+  - Town Hall
   layers:
   - Default
   - TransparentFX
