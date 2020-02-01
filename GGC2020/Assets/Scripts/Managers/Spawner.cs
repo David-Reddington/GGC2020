@@ -9,8 +9,8 @@ public class Spawner : MonoBehaviour
     public enum EEnemyType
     {
         Knight,
-        Golem,
         Goblin,
+        Golem,
         Wizard
     }
 
@@ -21,17 +21,17 @@ public class Spawner : MonoBehaviour
     public GameObject mGoblinPrefab;
     public GameObject mWizardPrefab;
 
-    private Dictionary<EEnemyType, GameObject> mEnemies = new Dictionary<EEnemyType, GameObject>(4);
+    private Dictionary<int, GameObject> mEnemies = new Dictionary<int, GameObject>(4);
 
     public int mTotalEnemies = 10;
     private int mNumEnemies = 0;
     private int mSpawnedEnemies = 0;
     private int mNumEnemiesMod = 12;
 
-    private int mSpawnID;
-    public List<int> mSpawnIDList;
+    private uint mSpawnID;
+    public List<uint> mSpawnIDList;
 
-    private bool mWaveSpawn = false;
+    private bool mWaveSpawn = true;
     public bool mSpawn = true;
 
     public float mWaveTimer;
@@ -41,13 +41,15 @@ public class Spawner : MonoBehaviour
     public int mTotalWaves;
     private int mNumWaves = 0;
 
-    private GameObject mFloor;
+    private GameObject mTerrain;
+
+    GameObject[] mSpawnPoints;
 
     public Vector3 centre;
     public Vector3 size;
 
-    AISpawn m_AISpawner;
-    //AIController m_AIController;
+    AISpawn mAISpawner;
+    EnemyAI mEnemyAI;
 
     ParticleSystem mParticleSystem;
 
@@ -56,13 +58,42 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mAISpawner = GetComponent(typeof(AISpawn)) as AISpawn;
+        mTerrain = FindObjectOfType<Terrain>().gameObject;
+        mSpawnPoints = GameObject.FindGameObjectsWithTag("SpawnArea");
+        mEnemies.Add(0, mKnightPrefab);
+        mEnemies.Add(1, mGoblinPrefab);
+        mEnemies.Add(2, mGolemPrefab);
+        mEnemies.Add(3, mWizardPrefab);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(mSpawn)
+        {
+            if(mNumWaves < mTotalWaves + 1)
+            {
+                if(mWaveSpawn)
+                {
+                    SpawnEnemy();
+                }
+                if(mNumEnemies == 0)
+                {
+                    ++mNumWaves;
+                    mWaveSpawn = true;
+                    mTotalEnemies += mNumEnemiesMod;
+                }
+                if(mNumEnemies == mTotalEnemies)
+                {
+                    mWaveSpawn = false;
+                }
+            }
+            else
+            {
+                // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Go To End Screen
+            }
+        }
     }
 
     void OnDrawGizmos()
@@ -76,13 +107,17 @@ public class Spawner : MonoBehaviour
     {
         ++mNumEnemies;
         ++mSpawnedEnemies;
-        Vector3 point = new Vector3(Random.Range(-47.5f, 47.5f), -2.75f, Random.Range(-47.5f, 47.5f));
-        GameObject e = Instantiate(mEnemies[mEnemyType], point, Quaternion.identity);
+        var b = mSpawnPoints[Random.Range(0, mSpawnPoints.Length)];
+        float randomX = b.GetComponent<BoxCollider>().size.x / 2 + b.transform.position.x;
+        float randomZ = b.GetComponent<BoxCollider>().size.z / 2 + b.transform.position.z;
+        Vector3 point = new Vector3(b.transform.position.x, mTerrain.transform.position.y + 0.5f, b.transform.position.z);
+        var index = Random.Range(0, 4);
+        GameObject e = Instantiate(mEnemies[index], point, Quaternion.identity);
         PlaySpawnEffect(e);
         SetID();
-        m_AISpawner.SetName(mSpawnID);
-        //m_AIController = e.GetComponent<AIController>();
-        //m_AIController.SID = mSpawnID;
+        mAISpawner.SetName(mSpawnID);
+        mEnemyAI = e.GetComponent<EnemyAI>();
+        mEnemyAI.ID = mSpawnID;
     }
 
     void PlaySpawnEffect(GameObject e)
@@ -101,7 +136,7 @@ public class Spawner : MonoBehaviour
 
     public void SetID()
     {
-        mSpawnID = Random.Range(1, 1000);
+        mSpawnID = (uint)Random.Range(1, 1000);
         if (!mSpawnIDList.Contains(mSpawnID))
         {
             mSpawnIDList.Add(mSpawnID);
@@ -112,7 +147,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void KillEnemy(int sID)
+    public void KillEnemy(uint sID)
     {
         for (var i = 0; i < mSpawnIDList.Count; ++i)
         {
@@ -124,7 +159,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void EnableSpawner(int sID)
+    public void EnableSpawner(uint sID)
     {
         if (mSpawnID == sID)
         {
@@ -132,7 +167,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void DisableSpawner(int sID)
+    public void DisableSpawner(uint sID)
     {
         if (mSpawnID == sID)
         {
@@ -151,7 +186,7 @@ public class Spawner : MonoBehaviour
         mSpawn = true;
     }
 
-    public int GetSpawnID
+    public uint GetSpawnID
     {
         get { return mSpawnID; }
     }

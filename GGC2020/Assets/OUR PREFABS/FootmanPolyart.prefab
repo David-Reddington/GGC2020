@@ -40,6 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8920854907444130381}
   - component: {fileID: 8920854907444130380}
+  - component: {fileID: -1826677017368502226}
+  - component: {fileID: 7914476079922891191}
+  - component: {fileID: -8152745190164642578}
   m_Layer: 0
   m_Name: FootmanPolyart
   m_TagString: Untagged
@@ -82,6 +85,61 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1826677017368502226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920854907444130371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aa9db56ab9f25458e70cee97acb091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &7914476079922891191
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920854907444130371}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-8152745190164642578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920854907444130371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe5a622b1f7cad4d9ccd920130e068b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mEnemyName: 
+  mID: 0
+  mNavAgent: {fileID: 0}
+  mMovementSpeed: 0
+  mBuildingDamage: 0
+  mUnitDamage: 0
+  mAttackRate: 0
+  mAttackRange: 0
+  mIdleTime: 2
 --- !u!1 &8920854907466168187
 GameObject:
   m_ObjectHideFlags: 0

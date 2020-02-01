@@ -15,4 +15,9 @@ public class Golem : EnemyAI
     {
         
     }
+
+    protected override void Attack()
+    {
+        base.Attack();
+    }
 }
