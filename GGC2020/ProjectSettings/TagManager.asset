@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Tower
   - Enemy
-  - GameManager
+  - Building
   layers:
   - Default
   - TransparentFX
