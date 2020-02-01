@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class MouseClick : MonoBehaviour
 {
     public string ClickTag;
+    public string UITag;
 
     private GameObject CurrentSelected;
     private Transform menu;
@@ -13,38 +15,65 @@ public class MouseClick : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse is down");
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = Input.mousePosition;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
 
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            if (hit)
+
+            if (results.Count > 0)
             {
-                if (menu != null && menu.gameObject.activeSelf)
+                //WorldUI is my layer name
+                if (results[0].gameObject.layer == LayerMask.GetMask("UI"))
                 {
-                    if (hitInfo.transform.gameObject.name != CurrentSelected.name)
-                    {
-                        menu.gameObject.SetActive(false);
-                    }
-
-                }
-                Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-                if (hitInfo.transform.gameObject.tag == ClickTag)
-                {
-                    CurrentSelected = hitInfo.transform.gameObject;
-                    menu = CurrentSelected.transform.Find("BuildingMenu");
-
-                    if (!menu.gameObject.activeSelf)
-                    {
-                        menu.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        menu.gameObject.SetActive(false);
-                    }
-
-                    Debug.Log("It's Working!");
+                    string dbg = "Root Element: {0} \n GrandChild Element: {1}";
+                    Debug.Log(string.Format(dbg, results[results.Count - 1].gameObject.name, results[0].gameObject.name));
+                    //Debug.Log("Root Element: "+results[results.Count-1].gameObject.name);
+                    //Debug.Log("GrandChild Element: "+results[0].gameObject.name);
+                    results.Clear();
                 }
             }
+                else
+                {
+                    if (hit)
+                    {
+                        if (menu != null && menu.gameObject.activeSelf)
+                        {
+                            if (hitInfo.transform.gameObject.name != CurrentSelected.name)
+                            {
+                                menu.gameObject.SetActive(false);
+                            }
+
+                        }
+                        Debug.Log("Hit " + hitInfo.transform.gameObject.name);
+                        if (hitInfo.transform.gameObject.tag == ClickTag)
+                        {
+                            CurrentSelected = hitInfo.transform.gameObject;
+                            menu = CurrentSelected.transform.Find("BuildingMenu");
+
+                            if (!menu.gameObject.activeSelf)
+                            {
+                                menu.gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                menu.gameObject.SetActive(false);
+                            }
+
+                            Debug.Log("It's Working!");
+                        }
+                    }
+                }
+
+
+            Debug.Log("Mouse is down");
+
+          //  Debug.Log("Hit " + hitInfo.transform.gameObject.name);
+
+            
         }
     }
 }
