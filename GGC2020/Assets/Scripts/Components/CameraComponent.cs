@@ -25,7 +25,6 @@ public class CameraComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.parent = null;
         transform.position = mTransform.position;
         transform.rotation = mTransform.rotation;
         //bIsAttached = false;
