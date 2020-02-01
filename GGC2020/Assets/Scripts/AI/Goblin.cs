@@ -15,4 +15,10 @@ public class Goblin : EnemyAI
     {
         
     }
+
+    protected override void Attack()
+    {
+        
+        base.Attack();
+    }
 }

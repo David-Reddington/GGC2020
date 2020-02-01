@@ -15,4 +15,9 @@ public class Wizard : EnemyAI
     {
         
     }
+
+    protected override void Attack()
+    {
+        base.Attack();
+    }
 }

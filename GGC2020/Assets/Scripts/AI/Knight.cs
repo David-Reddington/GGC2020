@@ -15,4 +15,9 @@ public class Knight : EnemyAI
     {
         
     }
+
+    protected override void Attack()
+    {
+        base.Attack();
+    }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class AISpawn : MonoBehaviour
 {
     private GameObject obj;
-    public List<int> SpawnerID;
+    public List<uint> SpawnerID;
 
     // Use this for initialization
     void Start()
     {
-        SpawnerID = new List<int>();
+        SpawnerID = new List<uint>();
         obj = GameObject.FindWithTag("AISpawner");
     }
 
@@ -25,7 +25,7 @@ public class AISpawn : MonoBehaviour
         obj.BroadcastMessage("KillEnemy", SpawnerID);
     }
 
-    public void SetName(int sName)
+    public void SetName(uint sName)
     {
         SpawnerID.Add(sName);
     }
