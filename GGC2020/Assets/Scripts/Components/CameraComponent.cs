@@ -13,10 +13,6 @@ public class CameraComponent : MonoBehaviour
     //float camSens = 0.25f; //How sensitive it with mouse
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
-    private Vector3 gamePlayCameraAngle = new Vector3(0,180,0);
-    private Vector3 gamePlayCameraPosition = new Vector3(0, 9 , 13);
-
-
 
     //bool bIsAttached = false;
 
@@ -29,53 +25,43 @@ public class CameraComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] temp = GameObject.FindGameObjectsWithTag("GameManager");
-        if (temp[0].GetComponent<GameManager>().currentGamestate == Gamestate.Play)
-        {
-            transform.parent = null;
-            transform.position = mTransform.position;
-            transform.rotation = mTransform.rotation;
-            //bIsAttached = false;
+        transform.parent = null;
+        transform.position = mTransform.position;
+        transform.rotation = mTransform.rotation;
+        //bIsAttached = false;
 
-            //if (Input.GetMouseButton(1))
-            //{
-            //    lastMouse = Input.mousePosition - lastMouse;
-            //    lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-            //    lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
-            //    transform.eulerAngles = lastMouse;
-            //    //lastMouse = Input.mousePosition;
-            //    //Mouse  camera angle done. 
-            //}
-            //lastMouse = Input.mousePosition;
-            //Keyboard commands
-            //float f = 0.0f;
-            Vector3 p = GetBaseInput();
+        //if (Input.GetMouseButton(1))
+        //{
+        //    lastMouse = Input.mousePosition - lastMouse;
+        //    lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
+        //    lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
+        //    transform.eulerAngles = lastMouse;
+        //    //lastMouse = Input.mousePosition;
+        //    //Mouse  camera angle done. 
+        //}
+        //lastMouse = Input.mousePosition;
 
-            totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-            p = p * mainSpeed;
 
-            p = p * Time.deltaTime;
-            Vector3 newPosition = transform.position;
-            if (Input.GetKey(KeyCode.Space))
-            { //If player wants to move on X and Z axis only
-                transform.Translate(p);
-                newPosition.x = transform.position.x;
-                newPosition.z = transform.position.z;
-                transform.position = newPosition;
-            }
-            else
-            {
-                transform.Translate(p);
-            }
+        //Keyboard commands
+        //float f = 0.0f;
+        Vector3 p = GetBaseInput();
+
+        totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+        p = p * mainSpeed;
+
+        p = p * Time.deltaTime;
+        Vector3 newPosition = transform.position;
+        if (Input.GetKey(KeyCode.Space))
+        { //If player wants to move on X and Z axis only
+            transform.Translate(p);
+            newPosition.x = transform.position.x;
+            newPosition.z = transform.position.z;
+            transform.position = newPosition;
         }
-    }
-
-    public void SetCameraMainMenu()
-    {
-
-        //transform.rotation.y (gamePlayCameraAngle);
-        transform.position = gamePlayCameraPosition;
-
+        else
+        {
+            transform.Translate(p);
+        }
     }
 
     private Vector3 GetBaseInput()
