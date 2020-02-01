@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Tower
+  - Enemy
   - Building
   layers:
   - Default
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - NavMesh Terrain
   - 
   - 
   - 
