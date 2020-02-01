@@ -9,8 +9,8 @@ public class Spawner : MonoBehaviour
     public enum EEnemyType
     {
         Knight,
-        Golem,
         Goblin,
+        Golem,
         Wizard
     }
 
@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
     public GameObject mGoblinPrefab;
     public GameObject mWizardPrefab;
 
-    private Dictionary<EEnemyType, GameObject> mEnemies = new Dictionary<EEnemyType, GameObject>(4);
+    private Dictionary<int, GameObject> mEnemies = new Dictionary<int, GameObject>(4);
 
     public int mTotalEnemies = 10;
     private int mNumEnemies = 0;
@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
     private uint mSpawnID;
     public List<uint> mSpawnIDList;
 
-    private bool mWaveSpawn = false;
+    private bool mWaveSpawn = true;
     public bool mSpawn = true;
 
     public float mWaveTimer;
@@ -61,6 +61,10 @@ public class Spawner : MonoBehaviour
         mAISpawner = GetComponent(typeof(AISpawn)) as AISpawn;
         mTerrain = FindObjectOfType<Terrain>().gameObject;
         mSpawnPoints = GameObject.FindGameObjectsWithTag("SpawnArea");
+        mEnemies.Add(0, mKnightPrefab);
+        mEnemies.Add(1, mGoblinPrefab);
+        mEnemies.Add(2, mGolemPrefab);
+        mEnemies.Add(3, mWizardPrefab);
     }
 
     // Update is called once per frame
@@ -104,8 +108,11 @@ public class Spawner : MonoBehaviour
         ++mNumEnemies;
         ++mSpawnedEnemies;
         var b = mSpawnPoints[Random.Range(0, mSpawnPoints.Length)];
+        float randomX = b.GetComponent<BoxCollider>().size.x / 2 + b.transform.position.x;
+        float randomZ = b.GetComponent<BoxCollider>().size.z / 2 + b.transform.position.z;
         Vector3 point = new Vector3(b.transform.position.x, mTerrain.transform.position.y + 0.5f, b.transform.position.z);
-        GameObject e = Instantiate(mEnemies[mEnemyType], point, Quaternion.identity);
+        var index = Random.Range(0, 4);
+        GameObject e = Instantiate(mEnemies[index], point, Quaternion.identity);
         PlaySpawnEffect(e);
         SetID();
         mAISpawner.SetName(mSpawnID);
