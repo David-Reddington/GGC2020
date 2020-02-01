@@ -577,9 +577,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6934492558587170213}
   - component: {fileID: 2973622498017526772}
-  - component: {fileID: 8204171078264049361}
-  - component: {fileID: 1920470872888688120}
-  - component: {fileID: 6728636546940806897}
+  - component: {fileID: 8194076759590286348}
+  - component: {fileID: 8215191743973750137}
+  - component: {fileID: 1835565899341635155}
   m_Layer: 0
   m_Name: FreeLichPolyart
   m_TagString: Untagged
@@ -622,7 +622,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8204171078264049361
+--- !u!114 &8194076759590286348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4aa9db56ab9f25458e70cee97acb091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!195 &1920470872888688120
+--- !u!195 &8215191743973750137
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -656,7 +656,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6728636546940806897
+--- !u!114 &1835565899341635155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca62251d35099c54b8b5927daecd0b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mEnemyName: Wizard
+  mEnemyName: 
   mID: 0
   mNavAgent: {fileID: 0}
   mMovementSpeed: 0
