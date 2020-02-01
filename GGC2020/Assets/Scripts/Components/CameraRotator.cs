@@ -10,7 +10,6 @@ public class CameraRotator : MonoBehaviour
     void Update()
     {
         GameObject[] temp = GameObject.FindGameObjectsWithTag("GameManager");
-
         if (temp[0].GetComponent<GameManager>().currentGamestate == Gamestate.MainMenu)
         {
             transform.Rotate(0, speed * Time.deltaTime, 0);

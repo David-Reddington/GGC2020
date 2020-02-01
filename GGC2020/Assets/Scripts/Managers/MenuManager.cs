@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    private Quaternion cameraRotation;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject[] temp2 = GameObject.FindGameObjectsWithTag("CameraPosition");
+
+        cameraRotation = temp2[0].GetComponent<Transform>().rotation;
     }
 
     public void ExitButton()
@@ -18,7 +21,13 @@ public class MenuManager : MonoBehaviour
     {
         GameObject[] temp = GameObject.FindGameObjectsWithTag("GameManager");
         temp[0].GetComponent<GameManager>().currentGamestate = Gamestate.Play;
+        transform.Find("MainMenu").gameObject.SetActive(false);
+
+        GameObject[] temp2 = GameObject.FindGameObjectsWithTag("CameraPosition");
+
+        temp2[0].GetComponent<Transform>().rotation = cameraRotation;
         //SetCamera Angle Again 
+
     }
     public void OptionsButton()
     {
